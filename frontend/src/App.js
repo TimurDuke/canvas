@@ -107,6 +107,10 @@ const App = () => {
         }
     };
 
+    const mouseDownHandler = () => {
+        setState({...state, mouseDown: true});
+    };
+
     return (
         <>
             <div>
