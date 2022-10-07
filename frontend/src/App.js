@@ -119,6 +119,19 @@ const App = () => {
         setState({...state, mouseDown: false, pixelsArray: []});
     };
 
+    const inputChangeHandler = e => {
+        const {name, value} = e.target;
+
+        if (name === 'size' && +value < 1 && value !== '') {
+            return alert('Enter correct size in pixels');
+        }
+
+        setOptions(prev => ({
+            ...prev,
+            [name]: value
+        }));
+    };
+
     return (
         <>
             <div>
