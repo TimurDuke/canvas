@@ -70,6 +70,43 @@ const App = () => {
         });
     }, [pixels]);
 
+    const canvasMouseMoveHandler = event => {
+        const x = event.clientX;
+        const y = event.clientY;
+
+        if (state.mouseDown && options.points) {
+            setState(prev => ({
+                ...prev,
+                pixelsArray: [...prev.pixelsArray, {
+                    x,
+                    y,
+                    color: options.color,
+                    size: options.size,
+                    points: true,
+                }]
+            }));
+
+            const context = canvas.current.getContext('2d');
+
+            draw(context, options.color, x, y, options.size, Math.PI * 2, true);
+        } else if (state.mouseDown && options.circles) {
+            setState(prev => ({
+                ...prev,
+                pixelsArray: [...prev.pixelsArray, {
+                    x,
+                    y,
+                    color: options.color,
+                    size: options.size,
+                    circles: true,
+                }]
+            }));
+
+            const context = canvas.current.getContext('2d');
+
+            draw(context, options.color, x, y, options.size, (Math.PI / 180) * 360);
+        }
+    };
+
     return (
         <>
             <div>
