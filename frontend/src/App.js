@@ -1,4 +1,5 @@
 import React, {useEffect, useRef, useState} from 'react';
+import CanvasComponent from "./components/CanvasComponent/CanvasComponent";
 
 const draw = (context, color, x, y, size, angle, fill) => {
     if (fill) {
@@ -134,9 +135,28 @@ const App = () => {
 
     return (
         <>
-            <div>
-                ku
-            </div>
+            <CanvasComponent
+                canvas={canvas}
+                mouseDownHandler={mouseDownHandler}
+                mouseUpHandler={mouseUpHandler}
+                canvasMouseMoveHandler={canvasMouseMoveHandler}
+                options={options}
+                inputChangeHandler={inputChangeHandler}
+                pointsHandler={
+                    () => setOptions(prev => ({
+                        ...prev,
+                        points: true,
+                        circles: false
+                    }))
+                }
+                circlesHandler={
+                    () => setOptions(prev => ({
+                        ...prev,
+                        circles: true,
+                        points: false
+                    }))
+                }
+            />
         </>
     );
 };
