@@ -111,6 +111,14 @@ const App = () => {
         setState({...state, mouseDown: true});
     };
 
+    const mouseUpHandler = () => {
+        ws.current.send(JSON.stringify({
+            type: "CREATE_PIXELS",
+            newPixels: [...state.pixelsArray]
+        }));
+        setState({...state, mouseDown: false, pixelsArray: []});
+    };
+
     return (
         <>
             <div>
